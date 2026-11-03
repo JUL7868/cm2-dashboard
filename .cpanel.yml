@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/crazy510/public_html/cm2/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R *.php .htaccess schema.sql $DEPLOYPATH
