@@ -1,0 +1,35 @@
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(80) NOT NULL,
+  email VARCHAR(160) NOT NULL UNIQUE,
+  pass_hash VARCHAR(255) NOT NULL,
+  role VARCHAR(10) NOT NULL DEFAULT 'member'
+);
+CREATE TABLE workstreams (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  blurb VARCHAR(255) DEFAULT '',
+  tier VARCHAR(10) NOT NULL DEFAULT 'primary',
+  sort INT NOT NULL DEFAULT 0
+);
+CREATE TABLE items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  workstream_id INT NOT NULL,
+  type VARCHAR(12) NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  notes TEXT,
+  status VARCHAR(10) NOT NULL DEFAULT 'todo',
+  owner_id INT NULL,
+  due_date DATE NULL,
+  depends_on INT NULL,
+  priority INT NOT NULL DEFAULT 2,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  INDEX (workstream_id), INDEX (type), INDEX (status)
+);
+CREATE TABLE activity (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  item_id INT NULL, user_id INT NULL,
+  what VARCHAR(255) NOT NULL,
+  at DATETIME NOT NULL
+);
